@@ -1,0 +1,45 @@
+@import "tailwindcss";
+@import "@fontsource-variable/afacad-flux";
+
+@theme {
+  --font-sans: "Afacad Flux Variable", system-ui, "Segoe UI", Roboto, sans-serif;
+
+  /* Neon green sampled from the Figma landing frame (logo, {editable}, CTAs) */
+  --color-brand-50: #f5fff4;
+  --color-brand-100: #dcffdb;
+  --color-brand-200: #b9ffb7;
+  --color-brand-300: #92ff8e;
+  --color-brand-400: #7fff7a;
+  --color-brand-500: #68ff63;
+  --color-brand-600: #35ff2e;
+  --color-brand-700: #08fa00;
+  --color-brand-800: #07c700;
+  --color-brand-900: #059301;
+  --color-brand-950: #036600;
+
+  /* Warm near-black scale sampled from the Figma landing frame background */
+  --color-ink-50: #e9e7e3;
+  --color-ink-950: #0f0d09;
+  --color-ink-900: #13110c;
+  --color-ink-850: #1c1811;
+  --color-ink-800: #1f1b14;
+  --color-ink-750: #252119;
+  --color-ink-700: #2f291f;
+  --color-ink-600: #433c30;
+  --color-ink-500: #777063;
+  --color-ink-400: #979490;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--color-ink-800);
+  color: #e9e7e3;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}

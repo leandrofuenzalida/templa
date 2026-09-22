@@ -1,0 +1,63 @@
+rules_version = '2';
+
+// Security rules for Templa MVP (no Cloud Functions; Spark plan)
+//
+// Strategies:
+// 1. Disposable email blocking: validated at user creation time (rules check) and client-side
+// 2. 3-template limit: enforced client-side (templates.length < 3) since templateCount is immutable
+//    (no Cloud Functions available to maintain it atomically)
+// 3. templateCount field: initialized on user creation, never updated by client
+//    (attempting to update will be rejected by these rules)
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    match /users/{uid} {
+      allow read: if request.auth != null && request.auth.uid == uid;
+      allow create: if request.auth != null && request.auth.uid == uid
+        && request.resource.data.templateCount == 0
+        && !isDisposableEmail(request.resource.data.email);
+      // templateCount is immutable — only initialized on user creation, never updated by client
+    }
+
+    match /templates/{templateId} {
+      allow read, update, delete: if request.auth != null
+        && request.auth.uid == resource.data.ownerId;
+      allow create: if request.auth != null
+        && request.auth.uid == request.resource.data.ownerId;
+    }
+  }
+}
+
+function isDisposableEmail(email) {
+  // Extract domain from email
+  let domain = email.split('@')[1].toLowerCase();
+
+  // List of known disposable email domains
+  let disposableDomains = [
+    // Temporary/disposable services
+    '10minutemail.com', '10minutemail.co.uk', '10minutemail.de',
+    '24hourmail.com',
+    'mailinator.com', 'mailinator.net', 'mailinator.org',
+    'guerrillamail.com', 'guerrillamail.net', 'guerrillamail.org', 'guerrillamail.biz',
+    'yopmail.com', 'yopmail.fr', 'yopmail.net',
+    'tempmail.com',
+    'temp-mail.org', 'temp-mail.io',
+    'throwaway.email',
+    'maildrop.cc',
+    'grr.la', 'getnada.com',
+    '0-mail.com', '0box.eu',
+    'emailondeck.com',
+    'mytrashmail.com',
+    'trashmail.com',
+    'fakeinbox.com',
+    'sharklasers.com',
+    'spam4.me',
+    'trashmail.ws',
+    'superrito.com',
+    'trash-mail.com',
+    'maileater.com',
+  ];
+
+  return disposableDomains.indexOf(domain) >= 0;
+}
