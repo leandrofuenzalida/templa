@@ -97,7 +97,7 @@ export function TemplateUse() {
         Número de WhatsApp (opcional)
         <input
           type="tel"
-          inputMode="numeric"
+          inputMode="tel"
           value={phone}
           onChange={(e) => setPhone(e.target.value)}
           placeholder="Ej: +56 9 1234 5678"
