@@ -101,7 +101,7 @@ export function TemplateUse() {
           value={phone}
           onChange={(e) => setPhone(e.target.value)}
           placeholder="Ej: +56 9 1234 5678"
-          className="w-full rounded-lg border border-ink-600 bg-ink-800 px-3 py-2 text-ink-50 outline-none focus:border-brand-500"
+          className="w-full rounded-lg border border-ink-600 bg-ink-800 px-3 py-2 text-base text-ink-50 outline-none focus:border-brand-500"
         />
       </label>
 
