@@ -46,6 +46,7 @@ export const InlineTemplateEditor = forwardRef(function InlineTemplateEditor(
 ) {
   const containerRef = useRef(null)
   const skipNextSync = useRef(false)
+  const savedRangeRef = useRef(null)
 
   useEffect(() => {
     if (skipNextSync.current) {
@@ -77,6 +78,16 @@ export const InlineTemplateEditor = forwardRef(function InlineTemplateEditor(
 
   useImperativeHandle(ref, () => ({
     insertChipAtRange(range, variable) {
+      // If range is invalid or lost, try using the saved range from selection
+      if (!range || !range.commonAncestorContainer || !range.commonAncestorContainer.parentNode) {
+        range = savedRangeRef.current
+      }
+      // If still no valid range, insert at end
+      if (!range || !range.commonAncestorContainer) {
+        const ref = { insertChipAtEnd: () => this.insertChipAtEnd(variable) }
+        ref.insertChipAtEnd()
+        return
+      }
       insertChip(range, variable)
     },
     insertChipAtEnd(variable) {
@@ -111,7 +122,9 @@ export const InlineTemplateEditor = forwardRef(function InlineTemplateEditor(
       onSelectText(null)
       return
     }
-    onSelectText({ range: range.cloneRange(), text })
+    const clonedRange = range.cloneRange()
+    savedRangeRef.current = clonedRange
+    onSelectText({ range: clonedRange, text })
   }
 
   return (
