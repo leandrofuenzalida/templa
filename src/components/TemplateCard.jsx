@@ -27,7 +27,7 @@ export function TemplateCard({ template, onDelete }) {
         </Link>
         <Link
           to={`/templates/${template.id}`}
-          className="rounded-full bg-brand-500 px-4 py-1.5 font-medium text-ink-950 hover:bg-brand-400"
+          className="rounded-full bg-brand-500 px-4 py-1.5 font-lg text-ink-950 hover:bg-brand-400"
         >
           Usar
         </Link>
