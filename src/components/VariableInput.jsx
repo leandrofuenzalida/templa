@@ -1,5 +1,5 @@
 const FIELD_CLASS =
-  "w-full rounded-lg border border-ink-600 bg-ink-800 px-3 py-2 text-ink-50 outline-none focus:border-brand-500";
+  "w-full rounded-lg border text-base border-ink-600 bg-ink-800 px-3 py-2 text-ink-50 outline-none focus:border-brand-500";
 
 // Renders the right input control for a variable's type, shared by the
 // "Generar formulario" preview (step 3) and the real "use template" screen.
@@ -21,7 +21,6 @@ export function VariableInput({ variable, value, onChange }) {
       return (
         <input
           type="number"
-          inputMode="numeric"
           value={current}
           onChange={(e) => onChange(e.target.value)}
           placeholder={variable.placeholder}
