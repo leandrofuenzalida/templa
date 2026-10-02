@@ -55,24 +55,6 @@ export function StepHeader({ step, onSave, saving }) {
       <div className="flex items-center gap-4">
         <button
           type="button"
-          className="flex items-center gap-1.5 text-sm text-ink-400 hover:text-ink-50"
-        >
-          <span className="flex h-4 w-4 items-center justify-center rounded-full border border-current text-[10px]">
-            ?
-          </span>
-          Ayuda
-        </button>
-        <button
-          type="button"
-          onClick={() => setTheme((t) => (t === "dark" ? "light" : "dark"))}
-          className="text-ink-400 hover:text-ink-50"
-          aria-label="Cambiar tema"
-          title="Modo claro/oscuro (próximamente)"
-        >
-          {theme === "dark" ? "🌙" : "☀️"}
-        </button>
-        <button
-          type="button"
           onClick={onSave}
           disabled={saving}
           className="rounded-full border border-brand-500 px-4 py-1.5 text-sm font-medium text-brand-400 hover:bg-brand-500/10 disabled:opacity-50"
