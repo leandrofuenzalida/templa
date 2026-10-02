@@ -4,8 +4,7 @@ import { Typeform } from '@typeform/embed-react'
 export function FeedbackWidget() {
   const [isOpen, setIsOpen] = useState(false)
 
-  // Reemplaza esto con tu ID de Typeform
-  const TYPEFORM_ID = 'YOUR_TYPEFORM_ID'
+  const TYPEFORM_ID = 'T3BVAU5l'
 
   if (!TYPEFORM_ID || TYPEFORM_ID === 'YOUR_TYPEFORM_ID') {
     return null
