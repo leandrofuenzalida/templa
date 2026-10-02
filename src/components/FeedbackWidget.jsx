@@ -1,12 +1,15 @@
 import { useState } from 'react'
 import { Typeform } from '@typeform/embed-react'
+import { useAuth } from '../context/AuthContext'
 
 export function FeedbackWidget() {
+  const { user } = useAuth()
   const [isOpen, setIsOpen] = useState(false)
 
   const TYPEFORM_ID = 'T3BVAU5l'
 
-  if (!TYPEFORM_ID || TYPEFORM_ID === 'YOUR_TYPEFORM_ID') {
+  // Solo mostrar después de login
+  if (!user || !TYPEFORM_ID || TYPEFORM_ID === 'YOUR_TYPEFORM_ID') {
     return null
   }
 
