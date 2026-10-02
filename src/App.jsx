@@ -2,6 +2,7 @@ import { HashRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
 import { TemplatesProvider } from "./context/TemplatesContext";
 import { ProtectedRoute } from "./components/ProtectedRoute";
+import { FeedbackWidget } from "./components/FeedbackWidget";
 import { Login } from "./pages/Login";
 import { Dashboard } from "./pages/Dashboard";
 import { TemplateWizard } from "./pages/TemplateWizard";
@@ -47,6 +48,7 @@ function App() {
               }
             />
           </Routes>
+          <FeedbackWidget />
         </HashRouter>
       </TemplatesProvider>
     </AuthProvider>
