@@ -35,7 +35,7 @@ export function Dashboard() {
       </header>
 
       <div className="mb-6 flex items-center justify-between">
-        <span className="text-sm text-ink-400">
+        <span className="text-base text-ink-100">
           {templates.length}/{limit} plantillas usadas (plan gratis)
         </span>
         {atLimit ? (
@@ -48,7 +48,7 @@ export function Dashboard() {
         ) : (
           <Link
             to="/templates/new"
-            className="rounded-full bg-brand-500 px-4 py-2 text-sm font-medium text-ink-950 hover:bg-brand-400 text-center whitespace-nowrap"
+            className="rounded-full bg-brand-500 px-4 py-2 text-base font-medium text-ink-950 hover:bg-brand-400 text-center whitespace-nowrap"
           >
             + Nueva plantilla
           </Link>
