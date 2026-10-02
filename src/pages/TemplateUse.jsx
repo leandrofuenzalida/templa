@@ -5,6 +5,7 @@ import { fillTemplate } from "../lib/templateParser";
 import { buildWhatsAppLink } from "../lib/whatsapp";
 import { TemplatePreview } from "../components/TemplatePreview";
 import { VariableInput } from "../components/VariableInput";
+import { CountryPhoneSelect } from "../components/CountryPhoneSelect";
 
 export function TemplateUse() {
   const { id } = useParams();
@@ -93,17 +94,7 @@ export function TemplateUse() {
         />
       </div>
 
-      <label className="mb-2 flex flex-col gap-1 text-sm text-ink-400">
-        Número de WhatsApp (opcional)
-        <input
-          type="tel"
-          inputMode="tel"
-          value={phone}
-          onChange={(e) => setPhone(e.target.value)}
-          placeholder="Ej: +56 9 1234 5678"
-          className="w-full rounded-lg border border-ink-600 bg-ink-800 px-3 py-2 text-base text-ink-50 outline-none focus:border-brand-500"
-        />
-      </label>
+      <CountryPhoneSelect value={phone} onChange={setPhone} />
 
       {!canSend && (
         <p className="mb-4 text-sm text-red-400">

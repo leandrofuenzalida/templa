@@ -35,7 +35,7 @@ export function Dashboard() {
       </header>
 
       <div className="mb-6 flex items-center justify-between">
-        <span className="text-m text-ink-400">
+        <span className="text-sm text-ink-400">
           {templates.length}/{limit} plantillas usadas (plan gratis)
         </span>
         {atLimit ? (

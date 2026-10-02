@@ -1,22 +1,28 @@
-import { parseSegments, formatValueForDisplay } from '../lib/templateParser'
+import { parseSegments, formatValueForDisplay } from "../lib/templateParser";
 
 // mode "chips": show each variable as a highlighted {label} chip (editor view).
 // mode "values": show the filled-in value, or a dim placeholder while empty (use view).
-export function TemplatePreview({ body, variables, values = {}, mode = 'chips' }) {
-  const segments = parseSegments(body, variables)
+export function TemplatePreview({
+  body,
+  variables,
+  values = {},
+  mode = "chips",
+}) {
+  const segments = parseSegments(body, variables);
 
   if (segments.length === 0) {
-    return <p className="text-ink-500 italic">El texto va a aparecer acá.</p>
+    return <p className="text-ink-500 italic">El texto va a aparecer acá.</p>;
   }
 
   return (
-    <p className="whitespace-pre-wrap leading-relaxed">
+    <p className="whitespace-pre-wrap text-lg/7">
       {segments.map((segment, i) => {
-        if (segment.type === 'text') return <span key={i}>{segment.value}</span>
+        if (segment.type === "text")
+          return <span key={i}>{segment.value}</span>;
 
-        const { variable } = segment
+        const { variable } = segment;
 
-        if (mode === 'chips') {
+        if (mode === "chips") {
           return (
             <span
               key={i}
@@ -24,20 +30,23 @@ export function TemplatePreview({ body, variables, values = {}, mode = 'chips' }
             >
               {`{${variable.label}}`}
             </span>
-          )
+          );
         }
 
-        const display = formatValueForDisplay(variable, values[segment.key])
+        const display = formatValueForDisplay(variable, values[segment.key]);
         return display ? (
           <span key={i} className="font-medium text-brand-400">
             {display}
           </span>
         ) : (
-          <span key={i} className="rounded-md bg-ink-700 px-1.5 py-0.5 text-ink-400">
+          <span
+            key={i}
+            className="rounded-md bg-ink-700 px-1.5 py-0.5 text-ink-400"
+          >
             {variable.label}
           </span>
-        )
+        );
       })}
     </p>
-  )
+  );
 }

@@ -9,7 +9,7 @@ export function TemplateCard({ template, onDelete }) {
           {template.variables?.length ?? 0} var.
         </span>
       </div>
-      <p className="line-clamp-3 text-m text-ink-400">{template.body}</p>
+      <p className="line-clamp-3 text-sm text-ink-400">{template.body}</p>
       <div className="mt-2 flex items-center gap-2 text-sm">
         <button
           type="button"
@@ -27,7 +27,7 @@ export function TemplateCard({ template, onDelete }) {
         </Link>
         <Link
           to={`/templates/${template.id}`}
-          className="rounded-full bg-brand-500 px-4 py-1.5 font-lg text-ink-950 hover:bg-brand-400"
+          className="rounded-full bg-brand-500 px-4 py-1.5 font-medium text-sm text-ink-950 hover:bg-brand-400"
         >
           Usar
         </Link>

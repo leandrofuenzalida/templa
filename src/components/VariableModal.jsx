@@ -62,7 +62,7 @@ export function VariableModal({ mode, initial, onCancel, onSave }) {
               autoFocus
               value={label}
               onChange={(e) => setLabel(e.target.value)}
-              className="rounded-lg border border-ink-600 bg-ink-800 px-3 py-2 text-ink-50 outline-none focus:border-brand-500"
+              className="rounded-lg border border-ink-600 bg-ink-800 px-3 py-2 text-base text-ink-50 outline-none focus:border-brand-500"
             />
           </label>
 
@@ -116,7 +116,7 @@ export function VariableModal({ mode, initial, onCancel, onSave }) {
                       }
                     }}
                     placeholder="Ej: Tarjeta de crédito"
-                    className="flex-1 rounded-lg border border-ink-600 bg-ink-800 px-3 py-2 text-ink-50 outline-none focus:border-brand-500"
+                    className="flex-1 rounded-lg border border-ink-600 bg-ink-800 px-3 py-2 text-base text-ink-50 outline-none focus:border-brand-500"
                   />
                   <button
                     type="button"
@@ -154,7 +154,7 @@ export function VariableModal({ mode, initial, onCancel, onSave }) {
                 value={placeholder}
                 onChange={(e) => setPlaceholder(e.target.value)}
                 placeholder="Ej: Juan Pérez"
-                className="rounded-lg border border-ink-600 bg-ink-800 px-3 py-2 text-ink-50 outline-none focus:border-brand-500"
+                className="rounded-lg border border-ink-600 bg-ink-800 px-3 py-2 text-base text-ink-50 outline-none focus:border-brand-500"
               />
             </label>
 
@@ -164,7 +164,7 @@ export function VariableModal({ mode, initial, onCancel, onSave }) {
                 <select
                   value={defaultValue}
                   onChange={(e) => setDefaultValue(e.target.value)}
-                  className="rounded-lg border border-ink-600 bg-ink-800 px-3 py-2 text-ink-50 outline-none focus:border-brand-500"
+                  className="rounded-lg border border-ink-600 bg-ink-800 px-3 py-2 text-base text-ink-50 outline-none focus:border-brand-500"
                 >
                   <option value="">Sin valor por defecto</option>
                   {options.map((o) => (
@@ -177,7 +177,7 @@ export function VariableModal({ mode, initial, onCancel, onSave }) {
                 <select
                   value={defaultValue}
                   onChange={(e) => setDefaultValue(e.target.value)}
-                  className="rounded-lg border border-ink-600 bg-ink-800 px-3 py-2 text-ink-50 outline-none focus:border-brand-500"
+                  className="rounded-lg border border-ink-600 bg-ink-800 px-3 py-2 text-base text-ink-50 outline-none focus:border-brand-500"
                 >
                   <option value="">Sin valor por defecto</option>
                   <option value="true">Sí</option>
@@ -189,7 +189,7 @@ export function VariableModal({ mode, initial, onCancel, onSave }) {
                   value={defaultValue}
                   onChange={(e) => setDefaultValue(e.target.value)}
                   placeholder="Ej: Juan Pérez"
-                  className="rounded-lg border border-ink-600 bg-ink-800 px-3 py-2 text-ink-50 outline-none focus:border-brand-500"
+                  className="rounded-lg border border-ink-600 bg-ink-800 px-3 py-2 text-base text-ink-50 outline-none focus:border-brand-500"
                 />
               )}
             </label>

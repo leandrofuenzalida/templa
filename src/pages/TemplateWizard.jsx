@@ -172,7 +172,7 @@ export function TemplateWizard() {
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               placeholder="Nombre de la plantilla"
-              className="rounded-lg border border-ink-600 bg-ink-800 px-4 py-2.5 text-ink-50 outline-none focus:border-brand-500"
+              className="rounded-lg border border-ink-600 bg-ink-800 px-4 py-2.5 text-base text-ink-50 outline-none focus:border-brand-500"
             />
 
             <textarea
@@ -180,7 +180,7 @@ export function TemplateWizard() {
               onChange={(e) => setBody(e.target.value)}
               rows={12}
               placeholder="Pega acá el mensaje que quieres convertir en plantilla..."
-              className="resize-y rounded-lg border border-ink-600 bg-ink-800 px-4 py-3 leading-relaxed text-ink-50 outline-none focus:border-brand-500"
+              className="resize-y rounded-lg border border-ink-600 bg-ink-800 px-4 py-3 text-base leading-relaxed text-ink-50 outline-none focus:border-brand-500"
             />
 
             <div className="mt-2 flex justify-end">
