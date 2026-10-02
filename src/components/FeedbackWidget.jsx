@@ -1,15 +1,14 @@
 import { useState } from 'react'
-import { Typeform } from '@typeform/embed-react'
 import { useAuth } from '../context/AuthContext'
 
 export function FeedbackWidget() {
   const { user } = useAuth()
   const [isOpen, setIsOpen] = useState(false)
 
-  const TYPEFORM_ID = 'T3BVAU5l'
+  const TYPEFORM_URL = 'https://form.typeform.com/to/T3BVAU5l'
 
   // Solo mostrar después de login
-  if (!user || !TYPEFORM_ID || TYPEFORM_ID === 'YOUR_TYPEFORM_ID') {
+  if (!user || !TYPEFORM_URL) {
     return null
   }
 
@@ -38,9 +37,13 @@ export function FeedbackWidget() {
                 ✕
               </button>
             </div>
-            <div className="h-96">
-              <Typeform id={TYPEFORM_ID} />
-            </div>
+            <iframe
+              src={TYPEFORM_URL}
+              width="100%"
+              height="600"
+              frameBorder="0"
+              title="Feedback form"
+            />
           </div>
         </div>
       )}
