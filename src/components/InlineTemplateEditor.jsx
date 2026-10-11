@@ -49,7 +49,6 @@ export const InlineTemplateEditor = forwardRef(function InlineTemplateEditor(
 ) {
   const containerRef = useRef(null);
   const skipNextSync = useRef(false);
-  const savedRangeRef = useRef(null);
 
   useEffect(() => {
     if (skipNextSync.current) {
@@ -79,59 +78,48 @@ export const InlineTemplateEditor = forwardRef(function InlineTemplateEditor(
     onChange(serializeDom(container));
   }
 
+  function insertChipAtEnd(variable) {
+    const container = containerRef.current;
+    if (!container) return;
+    const range = document.createRange();
+    range.selectNodeContents(container);
+    range.collapse(false);
+    insertChip(range, variable);
+  }
+
   useImperativeHandle(ref, () => ({
     insertChipAtRange(range, variable) {
-      // If range is invalid or lost, try using the saved range from selection
-      if (
-        !range ||
-        !range.commonAncestorContainer ||
-        !range.commonAncestorContainer.parentNode
-      ) {
-        range = savedRangeRef.current;
+      if (range && containerRef.current?.contains(range.startContainer)) {
+        insertChip(range, variable);
+      } else {
+        insertChipAtEnd(variable);
       }
-      // If still no valid range, insert at end
-      if (!range || !range.commonAncestorContainer) {
-        const ref = { insertChipAtEnd: () => this.insertChipAtEnd(variable) };
-        ref.insertChipAtEnd();
+    },
+    insertChipAtEnd,
+  }));
+
+  useEffect(() => {
+    function handleDocumentSelectionChange() {
+      const container = containerRef.current;
+      const sel = window.getSelection();
+      if (!container || !sel || sel.rangeCount === 0) return;
+      const range = sel.getRangeAt(0);
+      if (!container.contains(range.commonAncestorContainer)) return;
+      const text = sel.toString();
+      if (sel.isCollapsed || !text.trim()) {
+        onSelectText(null);
         return;
       }
-      insertChip(range, variable);
-    },
-    insertChipAtEnd(variable) {
-      const container = containerRef.current;
-      if (!container) return;
-      const range = document.createRange();
-      range.selectNodeContents(container);
-      range.collapse(false);
-      insertChip(range, variable);
-    },
-  }));
+      onSelectText({ range: range.cloneRange(), text });
+    }
+    document.addEventListener("selectionchange", handleDocumentSelectionChange);
+    return () =>
+      document.removeEventListener("selectionchange", handleDocumentSelectionChange);
+  }, [onSelectText]);
 
   function handleInput() {
     skipNextSync.current = true;
     onChange(serializeDom(containerRef.current));
-  }
-
-  function handleSelectionChange() {
-    const sel = window.getSelection();
-    const container = containerRef.current;
-    if (!sel || sel.isCollapsed || sel.rangeCount === 0 || !container) {
-      onSelectText(null);
-      return;
-    }
-    const range = sel.getRangeAt(0);
-    if (!container.contains(range.commonAncestorContainer)) {
-      onSelectText(null);
-      return;
-    }
-    const text = sel.toString();
-    if (!text.trim()) {
-      onSelectText(null);
-      return;
-    }
-    const clonedRange = range.cloneRange();
-    savedRangeRef.current = clonedRange;
-    onSelectText({ range: clonedRange, text });
   }
 
   return (
@@ -140,8 +128,6 @@ export const InlineTemplateEditor = forwardRef(function InlineTemplateEditor(
       contentEditable
       suppressContentEditableWarning
       onInput={handleInput}
-      onMouseUp={handleSelectionChange}
-      onKeyUp={handleSelectionChange}
       onKeyDown={(e) => {
         if (e.key === "Escape") onEscape?.();
       }}
