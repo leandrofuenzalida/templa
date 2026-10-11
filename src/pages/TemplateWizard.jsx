@@ -160,12 +160,16 @@ export function TemplateWizard() {
       <div className="mx-auto max-w-5xl px-6 py-8">
         {step === 1 && (
           <div className="flex flex-col gap-4">
-            <div>
-              <h1 className="text-2xl font-semibold text-ink-50">Pega el texto de tu plantilla</h1>
-              <p className="text-ink-500">
-                Copia el mensaje que usas siempre. En el próximo paso vas a poder marcar las
-                partes que cambian como variables.
-              </p>
+            <div className="flex items-start justify-between gap-4">
+              <div>
+                <h1 className="text-2xl font-semibold text-ink-50">Crea tu plantilla</h1>
+                <p className="text-ink-500">
+                  Escribe o pega el mensaje y selecciona las partes que cambian para convertirlas en variables.
+                </p>
+              </div>
+              <span className="shrink-0 rounded-full bg-ink-750 px-3 py-1 text-sm text-brand-400">
+                {variables.length} {variables.length === 1 ? 'variable creada' : 'variables creadas'}
+              </span>
             </div>
 
             <input
@@ -174,41 +178,6 @@ export function TemplateWizard() {
               placeholder="Nombre de la plantilla"
               className="rounded-lg border border-ink-600 bg-ink-800 px-4 py-2.5 text-base text-ink-50 outline-none focus:border-brand-500"
             />
-
-            <textarea
-              value={body}
-              onChange={(e) => setBody(e.target.value)}
-              rows={12}
-              placeholder="Pega acá el mensaje que quieres convertir en plantilla..."
-              className="resize-y rounded-lg border border-ink-600 bg-ink-800 px-4 py-3 text-base leading-relaxed text-ink-50 outline-none focus:border-brand-500"
-            />
-
-            <div className="mt-2 flex justify-end">
-              <button
-                type="button"
-                onClick={() => setStep(2)}
-                disabled={!title.trim() || !body.trim()}
-                className="rounded-full bg-brand-500 px-5 py-2 font-medium text-ink-950 hover:bg-brand-400 disabled:opacity-50"
-              >
-                Continuar al paso 2 →
-              </button>
-            </div>
-          </div>
-        )}
-
-        {step === 2 && (
-          <div className="flex flex-col gap-4">
-            <div className="flex items-start justify-between gap-4">
-              <div>
-                <h1 className="text-2xl font-semibold text-ink-50">Editor de plantilla</h1>
-                <p className="text-ink-500">
-                  Selecciona cualquier palabra o frase para convertirla en una variable.
-                </p>
-              </div>
-              <span className="shrink-0 rounded-full bg-ink-750 px-3 py-1 text-sm text-brand-400">
-                {variables.length} {variables.length === 1 ? 'variable creada' : 'variables creadas'}
-              </span>
-            </div>
 
             <div className="flex flex-col gap-6 lg:flex-row">
               <div className="flex flex-1 flex-col gap-2">
@@ -251,26 +220,20 @@ export function TemplateWizard() {
               />
             </div>
 
-            <div className="mt-2 flex justify-between">
+            <div className="mt-2 flex justify-end">
               <button
                 type="button"
-                onClick={() => setStep(1)}
-                className="text-ink-400 hover:text-ink-50"
+                onClick={() => setStep(2)}
+                disabled={!title.trim() || !body.trim()}
+                className="rounded-full bg-brand-500 px-5 py-2 font-medium text-ink-950 hover:bg-brand-400 disabled:opacity-50"
               >
-                ← Volver al paso anterior
-              </button>
-              <button
-                type="button"
-                onClick={() => setStep(3)}
-                className="rounded-full bg-brand-500 px-5 py-2 font-medium text-ink-950 hover:bg-brand-400"
-              >
-                Continuar al paso 3 →
+                Generar formulario →
               </button>
             </div>
           </div>
         )}
 
-        {step === 3 && (
+        {step === 2 && (
           <div className="flex flex-col gap-6">
             <div>
               <h1 className="text-2xl font-semibold text-ink-50">Formulario generado</h1>
@@ -312,7 +275,7 @@ export function TemplateWizard() {
             <div className="flex justify-between">
               <button
                 type="button"
-                onClick={() => setStep(2)}
+                onClick={() => setStep(1)}
                 className="text-ink-400 hover:text-ink-50"
               >
                 ← Volver al paso anterior

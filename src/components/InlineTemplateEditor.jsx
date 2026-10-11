@@ -29,15 +29,27 @@ function buildDom(container, body, variables) {
   }
 }
 
+const BLOCK_TAGS = new Set(["DIV", "P"]);
+
 function serializeDom(container) {
   let out = "";
-  container.childNodes.forEach((node) => {
-    if (node.nodeType === Node.TEXT_NODE) {
-      out += node.textContent;
-    } else if (node.nodeType === Node.ELEMENT_NODE && node.dataset.key) {
-      out += `{{${node.dataset.key}}}`;
-    }
-  });
+  function walk(parent) {
+    parent.childNodes.forEach((node) => {
+      if (node.nodeType === Node.TEXT_NODE) {
+        out += node.textContent;
+      } else if (node.nodeType === Node.ELEMENT_NODE) {
+        if (node.dataset.key) {
+          out += `{{${node.dataset.key}}}`;
+        } else if (node.tagName === "BR") {
+          out += "\n";
+        } else {
+          if (BLOCK_TAGS.has(node.tagName) && out && !out.endsWith("\n")) out += "\n";
+          walk(node);
+        }
+      }
+    });
+  }
+  walk(container);
   return out;
 }
 
@@ -128,6 +140,10 @@ export const InlineTemplateEditor = forwardRef(function InlineTemplateEditor(
       contentEditable
       suppressContentEditableWarning
       onInput={handleInput}
+      onPaste={(e) => {
+        e.preventDefault();
+        document.execCommand("insertText", false, e.clipboardData.getData("text/plain"));
+      }}
       onKeyDown={(e) => {
         if (e.key === "Escape") onEscape?.();
       }}

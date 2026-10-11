@@ -1,9 +1,8 @@
 import { useState } from "react";
 
 const STEPS = [
-  { n: 1, label: "Pegar texto" },
-  { n: 2, label: "Crear variables" },
-  { n: 3, label: "Generar formulario" },
+  { n: 1, label: "Crear plantilla" },
+  { n: 2, label: "Generar formulario" },
 ];
 
 function CheckIcon() {
