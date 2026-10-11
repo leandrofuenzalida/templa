@@ -3,6 +3,7 @@ import { AuthProvider } from "./context/AuthContext";
 import { TemplatesProvider } from "./context/TemplatesContext";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import { FeedbackWidget } from "./components/FeedbackWidget";
+import { SwipeBack } from "./components/SwipeBack";
 import { Login } from "./pages/Login";
 import { Dashboard } from "./pages/Dashboard";
 import { TemplateWizard } from "./pages/TemplateWizard";
@@ -48,6 +49,7 @@ function App() {
               }
             />
           </Routes>
+          <SwipeBack />
           <FeedbackWidget />
         </HashRouter>
       </TemplatesProvider>
