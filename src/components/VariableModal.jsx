@@ -3,6 +3,7 @@ import { VARIABLE_TYPES } from '../lib/variableTypes'
 import { VariableTypeIcon } from './VariableTypeIcon'
 
 const EMPTY_OPTION_DRAFT = ''
+const HAS_FINE_POINTER = window.matchMedia('(pointer: fine)').matches
 
 export function VariableModal({ mode, initial, onCancel, onSave }) {
   const [label, setLabel] = useState(initial.label)
@@ -59,7 +60,7 @@ export function VariableModal({ mode, initial, onCancel, onSave }) {
           <label className="flex flex-col gap-1.5">
             <span className="text-sm text-ink-400">Nombre de la variable</span>
             <input
-              autoFocus
+              autoFocus={HAS_FINE_POINTER}
               value={label}
               onChange={(e) => setLabel(e.target.value)}
               className="rounded-lg border border-ink-600 bg-ink-800 px-3 py-2 text-base text-ink-50 outline-none focus:border-brand-500"
